@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discovery Agent - Measurement Plan</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #F8F9FB;
+      color: #1a1a2e;
+      line-height: 1.6;
+    }
+    
+    /* Top Header */
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 40px;
+      background: white;
+      border-bottom: 1px solid #E5E7EB;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: #1a1a2e;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+    }
+    
+    .logo-text h1 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+    
+    .logo-text span {
+      font-size: 0.85rem;
+      color: #6B7280;
+    }
+    
+    .date-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #4B5563;
+      font-size: 0.9rem;
+    }
+    
+    /* Navigation */
+    .nav-bar {
+      background: white;
+      padding: 0 40px;
+      border-bottom: 1px solid #E5E7EB;
+    }
+    
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .nav-tab {
+      padding: 14px 20px;
+      border: none;
+      background: transparent;
+      color: #6B7280;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    
+    .nav-tab:hover {
+      color: #1a1a2e;
+    }
+    
+    .nav-tab.active {
+      color: white;
+      background: #1a1a2e;
+      border-radius: 8px 8px 0 0;
+    }
+    
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(180deg, #F0F2F5 0%, #F8F9FB 100%);
+      padding: 60px 40px;
+      text-align: center;
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #374151;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-bottom: 24px;
+    }
+    
+    .hero h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 16px;
+      text-decoration: underline;
+      text-decoration-color: #E5E7EB;
+      text-underline-offset: 8px;
+    }
+    
+    .hero p {
+      font-size: 1.1rem;
+      color: #6B7280;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    /* Main Content */
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+    
+    /* Section Label */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #F3F4F6;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      color: #4B5563;
+      margin-bottom: 12px;
+    }
+    
+    /* Section Title */
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    
+    .section-desc {
+      color: #6B7280;
+      margin-bottom: 32px;
+      max-width: 800px;
+    }
+    
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid #E5E7EB;
+      transition: all 0.2s;
+    }
+    
+    .card:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    
+    .card.accent-red {
+      border-left: 4px solid #EF4444;
+    }
+    
+    .card.accent-blue {
+      border-left: 4px solid #3B82F6;
+    }
+    
+    .card.accent-green {
+      border-left: 4px solid #10B981;
+    }
+    
+    .card.accent-purple {
+      border-left: 4px solid #8B5CF6;
+    }
+    
+    .card.accent-orange {
+      border-left: 4px solid #F59E0B;
+    }
+    
+    .card.accent-gray {
+      border-left: 4px solid #6B7280;
+    }
+    
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #1a1a2e;
+    }
+    
+    .card h3.red { color: #DC2626; }
+    .card h3.blue { color: #2563EB; }
+    .card h3.green { color: #059669; }
+    .card h3.purple { color: #7C3AED; }
+    .card h3.orange { color: #D97706; }
+    
+    .card p {
+      color: #6B7280;
+      font-size: 0.95rem;
+    }
+    
+    /* Metric Card */
+    .metric-card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid #E5E7EB;
+      margin-bottom: 16px;
+    }
+    
+    .metric-card.nsm {
+      background: linear-gradient(135deg, #F0F9FF 0%, #FDF4FF 100%);
+      border: 2px solid #8B5CF6;
+    }
+    
+    .metric-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    
+    .metric-badge {
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .badge-nsm { background: #8B5CF6; color: white; }
+    .badge-l1 { background: #3B82F6; color: white; }
+    .badge-l2 { background: #10B981; color: white; }
+    .badge-support { background: #F59E0B; color: white; }
+    .badge-guard { background: #EF4444; color: white; }
+    .badge-valid { background: #06B6D4; color: white; }
+    
+    .metric-name {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-top: 8px;
+    }
+    
+    .metric-question {
+      color: #8B5CF6;
+      font-style: italic;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+    
+    .metric-def {
+      color: #4B5563;
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+    
+    .metric-formula {
+      background: #1a1a2e;
+      color: #4ADE80;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
+    
+    .metric-why {
+      background: #F9FAFB;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #4B5563;
+    }
+    
+    .metric-why strong {
+      color: #1a1a2e;
+    }
+    
+    .direction {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+    
+    .direction.up { background: #D1FAE5; color: #065F46; }
+    .direction.down { background: #FEE2E2; color: #991B1B; }
+    
+    /* Edit Button */
+    .edit-btn {
+      background: white;
+      border: 1px solid #E5E7EB;
+      color: #6B7280;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+    
+    .edit-btn:hover {
+      background: #F3F4F6;
+      color: #1a1a2e;
+    }
+    
+    .delete-btn {
+      background: white;
+      border: 1px solid #FCA5A5;
+      color: #DC2626;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+      margin-left: 8px;
+    }
+    
+    .delete-btn:hover {
+      background: #FEE2E2;
+      border-color: #DC2626;
+    }
+    
+    .btn-group {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .edit-field {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #8B5CF6;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      font-family: inherit;
+    }
+    
+    .edit-actions {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .save-btn {
+      background: #10B981;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    
+    .cancel-btn {
+      background: #F3F4F6;
+      color: #4B5563;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    
+    /* L2 indent */
+    .metric-card.l2-indent {
+      margin-left: 32px;
+      border-left: 3px solid #10B981;
+    }
+    
+    /* Category Header */
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 40px 0 20px 0;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #E5E7EB;
+    }
+    
+    .category-header h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+    
+    .category-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    
+    .category-icon.blue { background: #DBEAFE; }
+    .category-icon.green { background: #D1FAE5; }
+    .category-icon.orange { background: #FEF3C7; }
+    .category-icon.red { background: #FEE2E2; }
+    .category-icon.purple { background: #EDE9FE; }
+    .category-icon.cyan { background: #CFFAFE; }
+    
+    /* Table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .data-table th {
+      background: #1a1a2e;
+      color: white;
+      padding: 14px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    
+    .data-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #E5E7EB;
+      font-size: 0.9rem;
+    }
+    
+    .data-table tr:nth-child(even) {
+      background: #F9FAFB;
+    }
+    
+    .data-table tr:hover {
+      background: #F0F9FF;
+    }
+    
+    /* Principle Card */
+    .principle-card {
+      display: flex;
+      gap: 20px;
+      padding: 24px;
+      background: white;
+      border-radius: 12px;
+      border: 1px solid #E5E7EB;
+      margin-bottom: 16px;
+    }
+    
+    .principle-number {
+      width: 40px;
+      height: 40px;
+      background: #1a1a2e;
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    
+    .principle-content h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 8px;
+    }
+    
+    .principle-content p {
+      color: #6B7280;
+      font-size: 0.95rem;
+    }
+    
+    /* Framework Diagram */
+    .framework-box {
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      border: 1px solid #E5E7EB;
+      text-align: center;
+      margin: 32px 0;
+    }
+    
+    .framework-level {
+      margin: 16px 0;
+    }
+    
+    .framework-item {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 8px;
+      margin: 4px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    .framework-item.nsm {
+      background: #8B5CF6;
+      color: white;
+      font-size: 1rem;
+      padding: 16px 32px;
+    }
+    
+    .framework-item.l1 {
+      background: #DBEAFE;
+      color: #1E40AF;
+    }
+    
+    .framework-item.l2 {
+      background: #D1FAE5;
+      color: #065F46;
+    }
+    
+    .framework-arrow {
+      color: #9CA3AF;
+      font-size: 1.5rem;
+    }
+    
+    .framework-connector {
+      color: #6B7280;
+      font-size: 0.85rem;
+    }
+    
+    /* Export Section */
+    .export-section {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid #E5E7EB;
+      display: flex;
+      gap: 12px;
+    }
+    
+    .export-btn {
+      background: #1a1a2e;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    
+    .export-btn:hover {
+      background: #374151;
+    }
+    
+    .export-btn.secondary {
+      background: white;
+      color: #1a1a2e;
+      border: 1px solid #E5E7EB;
+    }
+    
+    .export-btn.secondary:hover {
+      background: #F3F4F6;
+    }
+    
+    /* Panel visibility */
+    .panel {
+      display: none;
+    }
+    
+    .panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #1a1a2e;
+      color: white;
+      padding: 14px 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: none;
+      z-index: 1000;
+    }
+    
+    .toast.show {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: slideUp 0.3s ease;
+    }
+    
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .top-header, .nav-bar, .main-content { padding-left: 20px; padding-right: 20px; }
+      .hero { padding: 40px 20px; }
+      .hero h2 { font-size: 2rem; }
+      .metric-card.l2-indent { margin-left: 16px; }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Top Header -->
+  <header class="top-header">
+    <div class="logo-section">
+      <div class="logo-icon">✦</div>
+      <div class="logo-text">
+        <h1>Discovery Agent</h1>
+        <span>Measurement Plan</span>
+      </div>
+    </div>
+    <div class="date-badge">
+      <span>📄</span>
+      <span>January 2026</span>
+    </div>
+  </header>
+  
+  <!-- Navigation -->
+  <nav class="nav-bar">
+    <div class="nav-tabs">
+      <button class="nav-tab active" data-tab="overview">Overview</button>
+      <button class="nav-tab" data-tab="principles">Guiding Principles</button>
+      <button class="nav-tab" data-tab="northstar">North Star</button>
+      <button class="nav-tab" data-tab="kpis">KPIs & Metrics</button>
+      <button class="nav-tab" data-tab="implementation">Implementation</button>
+    </div>
+  </nav>
+  
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span>✦</span>
+      <span>Disney Experiences Technology</span>
+    </div>
+    <h2>Measurement Plan</h2>
+    <p>A comprehensive guide to measuring guest confidence and decision readiness for the Discovery Agent AI-powered decision-support tool.</p>
+  </section>
+  
+  <!-- Main Content -->
+  <main class="main-content">
+    
+    <!-- Overview Panel -->
+    <section class="panel active" id="overview">
+      <div class="section-label">
+        <span>✦</span>
+        <span>Discovery Agent</span>
+      </div>
+      <h2 class="section-title">What Is Discovery Agent?</h2>
+      <p class="section-desc">Discovery Agent is an AI-powered decision-support tool that helps Walt Disney World guests make confident resort selection decisions in an increasingly complex planning environment.</p>
+      
+      <div class="cards-grid">
+        <div class="card accent-red">
+          <h3 class="red">The Problem It Solves</h3>
+          <p>Planning a Walt Disney World vacation has become overwhelming. Guests face dozens of resort options, interdependent constraints, and high perceived risk of making the "wrong" choice.</p>
+        </div>
+        <div class="card accent-blue">
+          <h3>The Value Proposition</h3>
+          <p>Discovery Agent intakes guest preferences, applies expert knowledge, and delivers personalized recommendations — so guests can be confident without becoming Disney experts.</p>
+        </div>
+        <div class="card accent-green">
+          <h3>What It Controls</h3>
+          <p>Whether guests leave feeling informed, oriented, and confident. It hands off confident guests to the booking system.</p>
+        </div>
+        <div class="card accent-gray">
+          <h3>What It Doesn't Control</h3>
+          <p>Booking conversion rates, room availability, pricing, and downstream booking system performance are outside Discovery Agent's scope.</p>
+        </div>
+      </div>
+      
+      <div class="section-label" style="margin-top: 48px;">
+        <span>📐</span>
+        <span>Framework</span>
+      </div>
+      <h2 class="section-title">Metric Hierarchy</h2>
+      
+      <div class="framework-box">
+        <div class="framework-level">
+          <div class="framework-item nsm">NSM: % Confident Ready-to-Book Guests</div>
+        </div>
+        <div class="framework-arrow">↑</div>
+        <div class="framework-connector">NSM = f(L1a AND L1b AND L1c)</div>
+        <div class="framework-arrow">↑</div>
+        <div class="framework-level">
+          <div class="framework-item l1">Preference Clarity</div>
+          <div class="framework-item l1">Recommendation Fit</div>
+          <div class="framework-item l1">Information Sufficiency</div>
+        </div>
+        <div class="framework-arrow">↑</div>
+        <div class="framework-level">
+          <div class="framework-item l2">Preference Capture</div>
+          <div class="framework-item l2">First Rec Interaction</div>
+          <div class="framework-item l2">Save Rate</div>
+          <div class="framework-item l2">Detail Engagement</div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Guiding Principles Panel -->
+    <section class="panel" id="principles">
+      <div class="section-label">
+        <span>📜</span>
+        <span>Foundation</span>
+      </div>
+      <h2 class="section-title">Guiding Principles</h2>
+      <p class="section-desc">These principles govern how we measure success for Discovery Agent.</p>
+      
+      <div class="principle-card">
+        <div class="principle-number">1</div>
+        <div class="principle-content">
+          <h4>Measure Guest Value, Not System Activity</h4>
+          <p>We measure what the guest gains (confidence, clarity, readiness), not what the system does (responses generated, recommendations served). Activity without value is noise.</p>
+        </div>
+      </div>
+      
+      <div class="principle-card">
+        <div class="principle-number">2</div>
+        <div class="principle-content">
+          <h4>Separate Causal Metrics from Validation Metrics</h4>
+          <p>What causes success (L1s, L2s) must not be judged by what proves it (booking conversion). Mixing these creates false accountability and unmeasurable goals.</p>
+        </div>
+      </div>
+      
+      <div class="principle-card">
+        <div class="principle-number">3</div>
+        <div class="principle-content">
+          <h4>Design for Long-Term Trust, Not Short-Term Wins</h4>
+          <p>Discovery Agent builds relationships, not funnels. Metrics should reward sustainable confidence, not pressure tactics that inflate short-term handoffs.</p>
+        </div>
+      </div>
+      
+      <div class="principle-card">
+        <div class="principle-number">4</div>
+        <div class="principle-content">
+          <h4>Metrics Should Enable Debugging, Not Just Reporting</h4>
+          <p>Every metric must answer: "If this drops 15%, do we know who owns the fix and what to investigate?" Metrics that can't be debugged can't be improved.</p>
+        </div>
+      </div>
+      
+      <div class="principle-card">
+        <div class="principle-number">5</div>
+        <div class="principle-content">
+          <h4>The Measurement Plan Is Stable; Implementations Are Not</h4>
+          <p>The metric definitions and hierarchy should remain consistent. The underlying Adobe events, thresholds, and technical implementations can evolve without breaking the framework.</p>
+        </div>
+      </div>
+      
+      <div class="principle-card">
+        <div class="principle-number">6</div>
+        <div class="principle-content">
+          <h4>Translate the Moment of Value into Measurement Language</h4>
+          <p>The guest's "moment of value" is feeling confident enough to book. Every metric should trace back to whether we created that moment.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- North Star Panel -->
+    <section class="panel" id="northstar">
+      <div class="section-label">
+        <span>⭐</span>
+        <span>North Star</span>
+      </div>
+      <h2 class="section-title">North Star Metric</h2>
+      <p class="section-desc">The single metric that defines Discovery Agent's success.</p>
+      
+      <div class="metric-card nsm" data-metric="nsm">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-nsm">NSM</span>
+            <div class="metric-name" data-field="name">% of Confident Ready-to-Book Guests</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('nsm')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('nsm')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">The percentage of Discovery Agent sessions that exhibit all core confidence signals across understanding, fit, and information.</p>
+        <div class="metric-formula" data-field="formula">Sessions meeting all L1 thresholds ÷ Total Sessions × 100</div>
+        <div class="metric-why">
+          <strong>Why this NSM:</strong> Represents felt readiness, not conversion. Explicitly derived from L1s, not revenue events. Measures what Discovery Agent controls. Cannot be gamed by pushing unprepared guests to booking.
+        </div>
+      </div>
+      
+      <div class="category-header">
+        <div class="category-icon purple">🔢</div>
+        <h3>NSM Calculation Logic</h3>
+      </div>
+      
+      <div class="card" style="margin-bottom: 32px;">
+        <p style="margin-bottom: 16px;">A session counts toward the NSM when <strong>ALL three L1 thresholds</strong> are met:</p>
+        <div class="metric-formula">
+NSM Session = TRUE when:
+  Preference Clarity     = TRUE  (event_pref_submit ≥ 1)
+  AND Recommendation Fit = TRUE  (event_rec_click OR event_save ≥ 1)
+  AND Information Sufficiency = TRUE  (detail engagement ≥ 1)
+        </div>
+      </div>
+      
+      <div class="cards-grid">
+        <div class="card accent-purple">
+          <h3>Why Not Measure Bookings?</h3>
+          <p>Discovery Agent is a decision-support tool, not a booking engine. It hands off confident guests to a separate booking system. Traditional conversion metrics would conflate Discovery Agent's performance with factors outside our control.</p>
+        </div>
+        <div class="card accent-blue">
+          <h3>What We Actually Control</h3>
+          <p>Discovery Agent controls one thing: whether guests leave ready to book. That's the product's job — absorb the complexity so guests don't have to become Disney experts. The NSM measures exactly that output.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- KPIs & Metrics Panel -->
+    <section class="panel" id="kpis">
+      <div class="section-label">
+        <span>📊</span>
+        <span>Metrics</span>
+      </div>
+      <h2 class="section-title">KPIs & Metrics</h2>
+      <p class="section-desc">Complete metric tree with L1s, L2s, Supporting metrics, and Guardrails.</p>
+      
+      <!-- L1: Preference Clarity -->
+      <div class="category-header">
+        <div class="category-icon blue">💡</div>
+        <h3>L1: Preference Clarity — "How well did we understand them?"</h3>
+      </div>
+      
+      <div class="metric-card" data-metric="l1-pref">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-l1">L1</span>
+            <div class="metric-name" data-field="name">Preference Clarity Rate</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('l1-pref')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('l1-pref')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">% of sessions where minimum viable preferences are captured.</p>
+        <div class="metric-formula" data-field="formula">Sessions with event_pref_submit ÷ Total Sessions × 100</div>
+        <div class="metric-why"><strong>Why:</strong> Confirms the system understood user intent. <span class="direction up">↑ Higher is better</span></div>
+      </div>
+      
+      <div class="metric-card l2-indent" data-metric="l2-capture">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-l2">L2</span>
+            <div class="metric-name" data-field="name">Preference Capture Rate</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('l2-capture')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('l2-capture')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">% of sessions where user submits any preference.</p>
+        <div class="metric-formula" data-field="formula">event_pref_submit ÷ Sessions</div>
+        <div class="metric-why"><strong>Why:</strong> Debuggable by preference type (dates, budget, location). <span class="direction up">↑ Higher is better</span></div>
+      </div>
+      
+      <!-- L1: Recommendation Fit -->
+      <div class="category-header">
+        <div class="category-icon blue">🎯</div>
+        <h3>L1: Recommendation Fit — "How well did we match them?"</h3>
+      </div>
+      
+      <div class="metric-card" data-metric="l1-fit">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-l1">L1</span>
+            <div class="metric-name" data-field="name">Recommendation Fit Rate</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('l1-fit')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('l1-fit')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">% of sessions where users engage meaningfully with recommendations.</p>
+        <div class="metric-formula" data-field="formula">Sessions with (event_rec_click OR event_save) ÷ Sessions with event_rec_impression × 100</div>
+        <div class="metric-why"><strong>Why:</strong> Captures perceived relevance without requiring conversion. <span class="direction up">↑ Higher is better</span></div>
+      </div>
+      
+      <div class="metric-card l2-indent" data-metric="l2-first">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-l2">L2</span>
+            <div class="metric-name" data-field="name">First Recommendation Interaction Rate</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('l2-first')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('l2-first')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">% of sessions where user engages with the first recommendation.</p>
+        <div class="metric-formula" data-field="formula">event_rec_click (rank=1) ÷ event_rec_impression × 100</div>
+        <div class="metric-why"><strong>Why:</strong> Early signal of algorithm quality. Fast A/B feedback. <span class="direction up">↑ Higher is better</span></div>
+      </div>
+      
+      <div class="metric-card l2-indent" data-metric="l2-save">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-l2">L2</span>
+            <div class="metric-name" data-field="name">Save / Shortlist Rate</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('l2-save')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('l2-save')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">% of sessions where user saves a recommendation.</p>
+        <div class="metric-formula" data-field="formula">event_save ÷ Sessions × 100</div>
+        <div class="metric-why"><strong>Why:</strong> Strongest intent signal before handoff. <span class="direction up">↑ Higher is better</span></div>
+      </div>
+      
+      <!-- L1: Information Sufficiency -->
+      <div class="category-header">
+        <div class="category-icon blue">📚</div>
+        <h3>L1: Information Sufficiency — "How well did we equip them?"</h3>
+      </div>
+      
+      <div class="metric-card" data-metric="l1-info">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-l1">L1</span>
+            <div class="metric-name" data-field="name">Information Sufficiency Rate</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('l1-info')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('l1-info')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">% of sessions where users engage with supporting information.</p>
+        <div class="metric-formula" data-field="formula">Sessions with detail events ÷ Sessions with event_rec_impression × 100</div>
+        <div class="metric-why"><strong>Why:</strong> Indicates whether users felt equipped to evaluate options. <span class="direction up">↑ Higher is better</span></div>
+      </div>
+      
+      <div class="metric-card l2-indent" data-metric="l2-detail">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-l2">L2</span>
+            <div class="metric-name" data-field="name">Detail Engagement Rate</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('l2-detail')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('l2-detail')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">% of sessions with detail content engagement (expand, compare, gallery, FAQ).</p>
+        <div class="metric-formula" data-field="formula">(event_detail_expand + event_compare + event_image_gallery + event_faq_open) ÷ rec_impressions</div>
+        <div class="metric-why"><strong>Why:</strong> Behavioral proxy for "did we equip them to decide?" <span class="direction up">↑ Higher is better</span></div>
+      </div>
+      
+      <!-- Supporting Metrics -->
+      <div class="category-header">
+        <div class="category-icon orange">🚪</div>
+        <h3>Supporting: Acquisition</h3>
+      </div>
+      
+      <div class="metric-card" data-metric="acq-entry">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-support">Support</span>
+            <div class="metric-name" data-field="name">Discovery Agent Entry Rate</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('acq-entry')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('acq-entry')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">% of eligible guests who start a Discovery session.</p>
+        <div class="metric-formula" data-field="formula">Discovery sessions ÷ Eligible site visitors × 100</div>
+        <div class="metric-why"><strong>Why:</strong> Are we reaching potential users? <span class="direction up">↑ Higher is better</span></div>
+      </div>
+      
+      <div class="metric-card" data-metric="acq-qualified">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-support">Support</span>
+            <div class="metric-name" data-field="name">Qualified Entry Rate</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('acq-qualified')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('acq-qualified')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">% of Discovery sessions where guest expresses concrete intent (dates, budget, destination).</p>
+        <div class="metric-formula" data-field="formula">Sessions with intent signals ÷ Total Discovery sessions × 100</div>
+        <div class="metric-why"><strong>Why:</strong> Entry without intent is noise. <span class="direction up">↑ Higher is better</span></div>
+      </div>
+      
+      <div class="category-header">
+        <div class="category-icon orange">🎢</div>
+        <h3>Supporting: Engagement</h3>
+      </div>
+      
+      <div class="metric-card" data-metric="eng-complete">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-support">Support</span>
+            <div class="metric-name" data-field="name">Discovery Completion Rate</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('eng-complete')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('eng-complete')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">% of sessions reaching recommendation + explanation state.</p>
+        <div class="metric-formula" data-field="formula">Sessions with (rec_impression AND detail_view) ÷ Total sessions × 100</div>
+        <div class="metric-why"><strong>Why:</strong> Are guests progressing through the journey? <span class="direction up">↑ Higher is better</span></div>
+      </div>
+      
+      <div class="metric-card" data-metric="eng-depth">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-support">Support</span>
+            <div class="metric-name" data-field="name">Recommendation Exploration Depth</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('eng-depth')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('eng-depth')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">Average number of recommendations meaningfully interacted with.</p>
+        <div class="metric-formula" data-field="formula">Sum(rec_clicks + rec_saves) ÷ Sessions with rec_impression</div>
+        <div class="metric-why"><strong>Why:</strong> Pair with Save Rate to interpret (high exploration + high saves = good). <span class="direction up">↑ Context-dependent</span></div>
+      </div>
+      
+      <div class="category-header">
+        <div class="category-icon orange">🔄</div>
+        <h3>Supporting: Retention</h3>
+      </div>
+      
+      <div class="metric-card" data-metric="ret-repeat">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-support">Support</span>
+            <div class="metric-name" data-field="name">Repeat Discovery Rate (30/90 days)</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('ret-repeat')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('ret-repeat')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">% of guests who reuse the agent for a new planning task.</p>
+        <div class="metric-formula" data-field="formula">Users with 2+ sessions (different trip intent) ÷ Total users × 100</div>
+        <div class="metric-why"><strong>Why:</strong> Trust signal — they valued it enough to return. <span class="direction up">↑ Higher is better</span></div>
+      </div>
+      
+      
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-support">Support</span>
+            <div class="metric-name" data-field="name">Assisted Journey Continuity</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('ret-continuity')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('ret-continuity')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">% of returning guests whose prior preferences are reused or referenced.</p>
+        <div class="metric-formula" data-field="formula">Return sessions with preference reuse ÷ Return sessions × 100</div>
+        <div class="metric-why"><strong>Why:</strong> Personalization is working — we remembered them. <span class="direction up">↑ Higher is better</span></div>
+      </div>
+      
+      <div class="metric-card" data-metric="ret-time">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-support">Support</span>
+            <div class="metric-name" data-field="name">Time-to-Confidence Improvement</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('ret-time')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('ret-time')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">Reduction in time or steps to reach readiness for repeat users.</p>
+        <div class="metric-formula" data-field="formula">Avg steps (repeat users) vs Avg steps (new users)</div>
+        <div class="metric-why"><strong>Why:</strong> Discovery Agent gets smarter over time. <span class="direction up">↑ Improvement is better</span></div>
+      </div>
+      
+      <div class="category-header">
+        <div class="category-icon cyan">✅</div>
+        <h3>Supporting: Validation (Downstream Proof)</h3>
+      </div>
+      
+      <div class="metric-card" data-metric="val-handoff">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-valid">Validation</span>
+            <div class="metric-name" data-field="name">Booking Handoff Rate</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('val-handoff')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('val-handoff')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">% of confident sessions that proceed to booking system.</p>
+        <div class="metric-formula" data-field="formula">Sessions with event_handoff_initiated ÷ NSM sessions × 100</div>
+        <div class="metric-why"><strong>Why:</strong> Do confident guests actually move toward booking? <span class="direction up">↑ Higher is better</span></div>
+      </div>
+      
+      <div class="metric-card" data-metric="val-conversion">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-valid">Validation</span>
+            <div class="metric-name" data-field="name">Conditional Booking Conversion</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('val-conversion')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('val-conversion')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">% of handoffs that result in completed booking.</p>
+        <div class="metric-formula" data-field="formula">Completed bookings ÷ Handoff sessions × 100</div>
+        <div class="metric-why"><strong>Why:</strong> Does confidence translate to conversion? (Requires booking system data) <span class="direction up">↑ Higher is better</span></div>
+      </div>
+      
+      <div class="metric-card" data-metric="val-time">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-valid">Validation</span>
+            <div class="metric-name" data-field="name">Time from Readiness → Booking</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('val-time')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('val-time')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">Average time between reaching "ready" state and booking.</p>
+        <div class="metric-formula" data-field="formula">Avg(booking_timestamp - readiness_timestamp)</div>
+        <div class="metric-why"><strong>Why:</strong> Decision velocity — are we accelerating bookings? <span class="direction down">↓ Lower is better</span></div>
+      </div>
+      
+      <div class="metric-card" data-metric="val-escalation">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-valid">Validation</span>
+            <div class="metric-name" data-field="name">Unintended Call Escalation Rate</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('val-escalation')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('val-escalation')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">% of sessions where users contact the call center after engaging with Discovery Agent in ways that indicate confusion, lack of confidence, or unmet information needs — rather than intentional human handoff.</p>
+        <div class="metric-formula" data-field="formula">Unintended call escalations ÷ Total Discovery sessions × 100</div>
+        <div class="metric-why"><strong>Why:</strong> Measures failure to resolve guest needs — are we creating confusion instead of clarity? <span class="direction down">↓ Lower is better</span></div>
+      </div>
+      
+      <div class="metric-card" data-metric="val-resurrect">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-valid">Validation</span>
+            <div class="metric-name" data-field="name">Resurrection Rate</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('val-resurrect')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('val-resurrect')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">% of abandoned sessions that later return and complete.</p>
+        <div class="metric-formula" data-field="formula">Users who abandoned then returned and reached NSM ÷ Users who abandoned × 100</div>
+        <div class="metric-why"><strong>Why:</strong> Can we recover lost sessions? <span class="direction up">↑ Higher is better</span></div>
+      </div>
+      
+      <!-- Guardrails -->
+      <div class="category-header">
+        <div class="category-icon red">🛡️</div>
+        <h3>Guardrails (Lower is Better)</h3>
+      </div>
+      
+      <div class="metric-card" data-metric="guard-early">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-guard">Guardrail</span>
+            <div class="metric-name" data-field="name">Early Exit Rate (&lt;30s)</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('guard-early')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('guard-early')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">Sessions ending within 30 seconds.</p>
+        <div class="metric-formula" data-field="formula">Sessions < 30s ÷ Total Sessions × 100</div>
+        <div class="metric-why"><strong>Guards against:</strong> Mismatched expectations, poor targeting. <span class="direction down">↓ Lower is better</span></div>
+      </div>
+      
+      <div class="metric-card" data-metric="guard-lowintent">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-guard">Guardrail</span>
+            <div class="metric-name" data-field="name">Low-Intent Entry Rate</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('guard-lowintent')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('guard-lowintent')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">Sessions with no preferences captured.</p>
+        <div class="metric-formula" data-field="formula">Sessions without event_pref_submit ÷ Total Sessions × 100</div>
+        <div class="metric-why"><strong>Guards against:</strong> Junk traffic, unclear value proposition. <span class="direction down">↓ Lower is better</span></div>
+      </div>
+      
+      <div class="metric-card" data-metric="guard-abandon">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-guard">Guardrail</span>
+            <div class="metric-name" data-field="name">Session Abandonment Rate</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('guard-abandon')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('guard-abandon')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">Sessions ending without meaningful engagement.</p>
+        <div class="metric-formula" data-field="formula">Sessions without (rec_click OR save OR handoff) ÷ Total Sessions × 100</div>
+        <div class="metric-why"><strong>Guards against:</strong> Broken or frustrating experience. <span class="direction down">↓ Lower is better</span></div>
+      </div>
+      
+      <div class="metric-card" data-metric="guard-cancel">
+        <div class="metric-header">
+          <div>
+            <span class="metric-badge badge-guard">Guardrail</span>
+            <div class="metric-name" data-field="name">Cancellation Rate</div>
+          </div>
+          <div class="btn-group">
+            <button class="edit-btn" onclick="editMetric('guard-cancel')">Edit</button>
+            <button class="delete-btn" onclick="deleteMetric('guard-cancel')">Delete</button>
+          </div>
+        </div>
+        <p class="metric-def" data-field="def">Bookings that are later cancelled.</p>
+        <div class="metric-formula" data-field="formula">Cancelled bookings ÷ Total bookings (from Discovery) × 100</div>
+        <div class="metric-why"><strong>Guards against:</strong> Guests were not actually ready. <span class="direction down">↓ Lower is better</span></div>
+      </div>
+    </section>
+    
+    <!-- Implementation Panel -->
+    <section class="panel" id="implementation">
+      <div class="section-label">
+        <span>⚙️</span>
+        <span>Technical</span>
+      </div>
+      <h2 class="section-title">Implementation</h2>
+      <p class="section-desc">Adobe Analytics events, eVars, and metric ownership.</p>
+      
+      <div class="category-header">
+        <div class="category-icon purple">📡</div>
+        <h3>Events to Create</h3>
+      </div>
+      
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Event Name</th>
+            <th>Trigger</th>
+            <th>Used In</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>event_pref_submit</code></td><td>User submits any preference input</td><td>Preference Capture Rate, NSM</td></tr>
+          <tr><td><code>event_rec_impression</code></td><td>Recommendations displayed</td><td>Multiple L1/L2 metrics</td></tr>
+          <tr><td><code>event_rec_click</code></td><td>User clicks a recommendation</td><td>Recommendation Fit Rate, First Rec Rate</td></tr>
+          <tr><td><code>event_save</code></td><td>User saves/shortlists a recommendation</td><td>Save Rate, Recommendation Fit Rate</td></tr>
+          <tr><td><code>event_detail_expand</code></td><td>User expands resort details</td><td>Detail Engagement Rate, NSM</td></tr>
+          <tr><td><code>event_compare</code></td><td>User uses comparison feature</td><td>Detail Engagement Rate</td></tr>
+          <tr><td><code>event_image_gallery</code></td><td>User views image gallery</td><td>Detail Engagement Rate</td></tr>
+          <tr><td><code>event_faq_open</code></td><td>User opens FAQ section</td><td>Detail Engagement Rate</td></tr>
+          <tr><td><code>event_handoff_initiated</code></td><td>User proceeds to booking</td><td>Validation metrics</td></tr>
+        </tbody>
+      </table>
+      
+      <div class="category-header">
+        <div class="category-icon purple">🏷️</div>
+        <h3>eVars to Create</h3>
+      </div>
+      
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>eVar</th>
+            <th>Values</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>eVar_pref_type</code></td><td>dates, budget, location, party_size, style</td><td>Dimension for preference analysis</td></tr>
+          <tr><td><code>eVar_rec_rank</code></td><td>1, 2, 3...</td><td>Position of recommendation interacted with</td></tr>
+          <tr><td><code>eVar_item_id</code></td><td>Resort identifier</td><td>Which resort was engaged with</td></tr>
+          <tr><td><code>eVar_rec_source</code></td><td>Algorithm version / variant</td><td>For A/B testing</td></tr>
+        </tbody>
+      </table>
+      
+      <div class="category-header">
+        <div class="category-icon blue">📋</div>
+        <h3>Complete Metrics Reference Table</h3>
+      </div>
+      
+      <table class="data-table" id="metricsTable">
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>Category</th>
+            <th>Metric</th>
+            <th>Definition</th>
+            <th>Formula</th>
+            <th>Direction</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-table-metric="nsm" style="background: #F3E8FF;"><td><span class="metric-badge badge-nsm">NSM</span></td><td>Core</td><td data-table-field="name"><strong>Confident Ready-to-Book Rate</strong></td><td data-table-field="def">Sessions exhibiting all L1 confidence signals</td><td data-table-field="formula"><code>All L1s met ÷ Sessions × 100</code></td><td><span class="direction up">↑ Higher</span></td></tr>
+          <tr data-table-metric="l1-pref"><td><span class="metric-badge badge-l1">L1</span></td><td>Core</td><td data-table-field="name"><strong>Preference Clarity Rate</strong></td><td data-table-field="def">Sessions where preferences captured</td><td data-table-field="formula"><code>pref_submit ÷ Sessions × 100</code></td><td><span class="direction up">↑ Higher</span></td></tr>
+          <tr data-table-metric="l1-fit"><td><span class="metric-badge badge-l1">L1</span></td><td>Core</td><td data-table-field="name"><strong>Recommendation Fit Rate</strong></td><td data-table-field="def">Sessions with meaningful rec engagement</td><td data-table-field="formula"><code>(click OR save) ÷ rec_impression × 100</code></td><td><span class="direction up">↑ Higher</span></td></tr>
+          <tr data-table-metric="l1-info"><td><span class="metric-badge badge-l1">L1</span></td><td>Core</td><td data-table-field="name"><strong>Information Sufficiency Rate</strong></td><td data-table-field="def">Sessions with detail engagement</td><td data-table-field="formula"><code>detail_events ÷ rec_impression × 100</code></td><td><span class="direction up">↑ Higher</span></td></tr>
+          <tr data-table-metric="l2-capture" style="background: #ECFDF5;"><td><span class="metric-badge badge-l2">L2</span></td><td>Core</td><td data-table-field="name">Preference Capture Rate</td><td data-table-field="def">Sessions with preference submission</td><td data-table-field="formula"><code>pref_submit ÷ Sessions</code></td><td><span class="direction up">↑ Higher</span></td></tr>
+          <tr data-table-metric="l2-first" style="background: #ECFDF5;"><td><span class="metric-badge badge-l2">L2</span></td><td>Core</td><td data-table-field="name">First Rec Interaction Rate</td><td data-table-field="def">Engagement with first recommendation</td><td data-table-field="formula"><code>rank=1 clicks ÷ rec_impression × 100</code></td><td><span class="direction up">↑ Higher</span></td></tr>
+          <tr data-table-metric="l2-save" style="background: #ECFDF5;"><td><span class="metric-badge badge-l2">L2</span></td><td>Core</td><td data-table-field="name">Save / Shortlist Rate</td><td data-table-field="def">Sessions with save action</td><td data-table-field="formula"><code>save ÷ Sessions × 100</code></td><td><span class="direction up">↑ Higher</span></td></tr>
+          <tr data-table-metric="l2-detail" style="background: #ECFDF5;"><td><span class="metric-badge badge-l2">L2</span></td><td>Core</td><td data-table-field="name">Detail Engagement Rate</td><td data-table-field="def">Sessions with detail content engagement</td><td data-table-field="formula"><code>detail_events ÷ rec_impression × 100</code></td><td><span class="direction up">↑ Higher</span></td></tr>
+          <tr data-table-metric="acq-entry" style="background: #FFFBEB;"><td><span class="metric-badge badge-support">Support</span></td><td>Acquisition</td><td data-table-field="name">Discovery Agent Entry Rate</td><td data-table-field="def">Eligible guests starting Discovery session</td><td data-table-field="formula"><code>discovery_sessions ÷ visitors × 100</code></td><td><span class="direction up">↑ Higher</span></td></tr>
+          <tr data-table-metric="acq-qualified" style="background: #FFFBEB;"><td><span class="metric-badge badge-support">Support</span></td><td>Acquisition</td><td data-table-field="name">Qualified Entry Rate</td><td data-table-field="def">Sessions with concrete intent expressed</td><td data-table-field="formula"><code>intent_sessions ÷ discovery_sessions × 100</code></td><td><span class="direction up">↑ Higher</span></td></tr>
+          <tr data-table-metric="eng-complete" style="background: #FFFBEB;"><td><span class="metric-badge badge-support">Support</span></td><td>Engagement</td><td data-table-field="name">Discovery Completion Rate</td><td data-table-field="def">Sessions reaching rec + explanation state</td><td data-table-field="formula"><code>(rec + detail) ÷ sessions × 100</code></td><td><span class="direction up">↑ Higher</span></td></tr>
+          <tr data-table-metric="eng-depth" style="background: #FFFBEB;"><td><span class="metric-badge badge-support">Support</span></td><td>Engagement</td><td data-table-field="name">Recommendation Exploration Depth</td><td data-table-field="def">Avg recommendations interacted with</td><td data-table-field="formula"><code>interactions ÷ rec_sessions</code></td><td><span class="direction up">↑ Context</span></td></tr>
+          <tr data-table-metric="ret-repeat" style="background: #FFFBEB;"><td><span class="metric-badge badge-support">Support</span></td><td>Retention</td><td data-table-field="name">Repeat Discovery Rate (30/90d)</td><td data-table-field="def">Guests reusing for new planning task</td><td data-table-field="formula"><code>returning_users ÷ users × 100</code></td><td><span class="direction up">↑ Higher</span></td></tr>
+          <tr data-table-metric="ret-continuity" style="background: #FFFBEB;"><td><span class="metric-badge badge-support">Support</span></td><td>Retention</td><td data-table-field="name">Assisted Journey Continuity</td><td data-table-field="def">Returning guests with preference reuse</td><td data-table-field="formula"><code>pref_reuse ÷ return_sessions × 100</code></td><td><span class="direction up">↑ Higher</span></td></tr>
+          <tr data-table-metric="ret-time" style="background: #FFFBEB;"><td><span class="metric-badge badge-support">Support</span></td><td>Retention</td><td data-table-field="name">Time-to-Confidence Improvement</td><td data-table-field="def">Step reduction for repeat users</td><td data-table-field="formula"><code>repeat_steps vs new_steps</code></td><td><span class="direction up">↑ Improvement</span></td></tr>
+          <tr data-table-metric="val-handoff" style="background: #ECFEFF;"><td><span class="metric-badge badge-valid">Valid</span></td><td>Validation</td><td data-table-field="name">Booking Handoff Rate</td><td data-table-field="def">Confident sessions proceeding to booking</td><td data-table-field="formula"><code>handoffs ÷ NSM_sessions × 100</code></td><td><span class="direction up">↑ Higher</span></td></tr>
+          <tr data-table-metric="val-conversion" style="background: #ECFEFF;"><td><span class="metric-badge badge-valid">Valid</span></td><td>Validation</td><td data-table-field="name">Conditional Booking Conversion</td><td data-table-field="def">Handoffs resulting in booking</td><td data-table-field="formula"><code>bookings ÷ handoffs × 100</code></td><td><span class="direction up">↑ Higher</span></td></tr>
+          <tr data-table-metric="val-time" style="background: #ECFEFF;"><td><span class="metric-badge badge-valid">Valid</span></td><td>Validation</td><td data-table-field="name">Time from Readiness → Booking</td><td data-table-field="def">Avg time between ready state and booking</td><td data-table-field="formula"><code>avg(book_time - ready_time)</code></td><td><span class="direction down">↓ Lower</span></td></tr>
+          <tr data-table-metric="val-escalation" style="background: #ECFEFF;"><td><span class="metric-badge badge-valid">Valid</span></td><td>Validation</td><td data-table-field="name">Unintended Call Escalation Rate</td><td data-table-field="def">Sessions with confusion-driven call center contact</td><td data-table-field="formula"><code>unintended_escalations ÷ sessions × 100</code></td><td><span class="direction down">↓ Lower</span></td></tr>
+          <tr data-table-metric="val-resurrect" style="background: #ECFEFF;"><td><span class="metric-badge badge-valid">Valid</span></td><td>Validation</td><td data-table-field="name">Resurrection Rate</td><td data-table-field="def">Abandoned sessions that return and complete</td><td data-table-field="formula"><code>recovered ÷ abandoned × 100</code></td><td><span class="direction up">↑ Higher</span></td></tr>
+          <tr data-table-metric="guard-early" style="background: #FEF2F2;"><td><span class="metric-badge badge-guard">Guard</span></td><td>Guardrail</td><td data-table-field="name">Early Exit Rate (&lt;30s)</td><td data-table-field="def">Sessions ending within 30 seconds</td><td data-table-field="formula"><code>short_sessions ÷ sessions × 100</code></td><td><span class="direction down">↓ Lower</span></td></tr>
+          <tr data-table-metric="guard-lowintent" style="background: #FEF2F2;"><td><span class="metric-badge badge-guard">Guard</span></td><td>Guardrail</td><td data-table-field="name">Low-Intent Entry Rate</td><td data-table-field="def">Sessions with no preferences captured</td><td data-table-field="formula"><code>no_pref ÷ sessions × 100</code></td><td><span class="direction down">↓ Lower</span></td></tr>
+          <tr data-table-metric="guard-abandon" style="background: #FEF2F2;"><td><span class="metric-badge badge-guard">Guard</span></td><td>Guardrail</td><td data-table-field="name">Session Abandonment Rate</td><td data-table-field="def">Sessions without meaningful progress</td><td data-table-field="formula"><code>no_progress ÷ sessions × 100</code></td><td><span class="direction down">↓ Lower</span></td></tr>
+          <tr data-table-metric="guard-cancel" style="background: #FEF2F2;"><td><span class="metric-badge badge-guard">Guard</span></td><td>Guardrail</td><td data-table-field="name">Cancellation Rate</td><td data-table-field="def">Bookings later cancelled</td><td data-table-field="formula"><code>cancelled ÷ bookings × 100</code></td><td><span class="direction down">↓ Lower</span></td></tr>
+        </tbody>
+      </table>
+      
+      <div class="export-section">
+        <button class="export-btn" onclick="exportCSV()">
+          <span>📥</span>
+          <span>Download Metrics Table (CSV)</span>
+        </button>
+        <button class="export-btn secondary" onclick="window.print()">
+          <span>🖨️</span>
+          <span>Print</span>
+        </button>
+      </div>
+    </section>
+    
+  </main>
+  
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <span>✓</span>
+    <span>Changes saved!</span>
+  </div>
+  
+  <script>
+    // Tab Navigation
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+    
+    // Edit Metric - now includes title editing
+    function editMetric(id) {
+      const card = document.querySelector(`[data-metric="${id}"]`);
+      if (!card) return;
+      
+      const nameEl = card.querySelector('[data-field="name"]');
+      const defEl = card.querySelector('[data-field="def"]');
+      const formulaEl = card.querySelector('[data-field="formula"]');
+      const btnGroup = card.querySelector('.btn-group');
+      
+      if (!defEl || !formulaEl) return;
+      
+      const currentName = nameEl ? nameEl.textContent : '';
+      const currentDef = defEl.textContent;
+      const currentFormula = formulaEl.textContent;
+      
+      // Convert to edit fields
+      if (nameEl) {
+        nameEl.outerHTML = `<input type="text" class="edit-field" data-field="name" value="${currentName}" style="font-size: 1.15rem; font-weight: 600;">`;
+      }
+      defEl.outerHTML = `<textarea class="edit-field" data-field="def" rows="2">${currentDef}</textarea>`;
+      formulaEl.outerHTML = `<input type="text" class="edit-field" data-field="formula" value="${currentFormula}">`;
+      
+      // Update buttons
+      btnGroup.innerHTML = `
+        <button class="save-btn" onclick="saveMetric('${id}', '${escapeStr(currentName)}', '${escapeStr(currentDef)}', '${escapeStr(currentFormula)}')">Save</button>
+        <button class="cancel-btn" onclick="cancelEdit('${id}', '${escapeStr(currentName)}', '${escapeStr(currentDef)}', '${escapeStr(currentFormula)}')">Cancel</button>
+      `;
+    }
+    
+    // Escape special characters for storing in attributes
+    function escapeStr(str) {
+      return str.replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, '\\n');
+    }
+    
+    // Save Metric - syncs to table
+    function saveMetric(id, oldName, oldDef, oldFormula) {
+      const card = document.querySelector(`[data-metric="${id}"]`);
+      const nameInput = card.querySelector('[data-field="name"]');
+      const defInput = card.querySelector('[data-field="def"]');
+      const formulaInput = card.querySelector('[data-field="formula"]');
+      
+      const newName = nameInput ? nameInput.value : oldName;
+      const newDef = defInput.value;
+      const newFormula = formulaInput.value;
+      
+      // Update card
+      if (nameInput) {
+        nameInput.outerHTML = `<div class="metric-name" data-field="name">${newName}</div>`;
+      }
+      card.querySelector('[data-field="def"]').outerHTML = `<p class="metric-def" data-field="def">${newDef}</p>`;
+      card.querySelector('[data-field="formula"]').outerHTML = `<div class="metric-formula" data-field="formula">${newFormula}</div>`;
+      
+      // Restore buttons
+      const btnGroup = card.querySelector('.save-btn').parentElement;
+      btnGroup.innerHTML = `
+        <button class="edit-btn" onclick="editMetric('${id}')">Edit</button>
+        <button class="delete-btn" onclick="deleteMetric('${id}')">Delete</button>
+      `;
+      
+      // Sync to table
+      syncToTable(id, newName, newDef, newFormula);
+      
+      showToast('Changes saved!');
+    }
+    
+    // Cancel Edit
+    function cancelEdit(id, name, def, formula) {
+      const card = document.querySelector(`[data-metric="${id}"]`);
+      
+      const nameInput = card.querySelector('[data-field="name"]');
+      if (nameInput && nameInput.tagName === 'INPUT') {
+        nameInput.outerHTML = `<div class="metric-name" data-field="name">${name}</div>`;
+      }
+      
+      const defInput = card.querySelector('[data-field="def"]');
+      if (defInput) {
+        defInput.outerHTML = `<p class="metric-def" data-field="def">${def}</p>`;
+      }
+      
+      const formulaInput = card.querySelector('[data-field="formula"]');
+      if (formulaInput) {
+        formulaInput.outerHTML = `<div class="metric-formula" data-field="formula">${formula}</div>`;
+      }
+      
+      // Restore buttons
+      const saveBtn = card.querySelector('.save-btn');
+      if (saveBtn) {
+        const btnGroup = saveBtn.parentElement;
+        btnGroup.innerHTML = `
+          <button class="edit-btn" onclick="editMetric('${id}')">Edit</button>
+          <button class="delete-btn" onclick="deleteMetric('${id}')">Delete</button>
+        `;
+      }
+    }
+    
+    // Sync changes to the table in Implementation tab
+    function syncToTable(id, name, def, formula) {
+      const tableRow = document.querySelector(`[data-table-metric="${id}"]`);
+      if (!tableRow) return;
+      
+      const nameCell = tableRow.querySelector('[data-table-field="name"]');
+      const defCell = tableRow.querySelector('[data-table-field="def"]');
+      const formulaCell = tableRow.querySelector('[data-table-field="formula"]');
+      
+      if (nameCell) {
+        // Preserve bold styling for L1 metrics
+        const isBold = nameCell.querySelector('strong');
+        nameCell.innerHTML = isBold ? `<strong>${name}</strong>` : name;
+      }
+      if (defCell) defCell.textContent = def;
+      if (formulaCell) formulaCell.innerHTML = `<code>${formula}</code>`;
+    }
+    
+    // Delete Metric
+    function deleteMetric(id) {
+      if (!confirm('Are you sure you want to delete this metric? This action cannot be undone.')) {
+        return;
+      }
+      
+      // Remove from card view
+      const card = document.querySelector(`[data-metric="${id}"]`);
+      if (card) {
+        card.style.transition = 'all 0.3s ease';
+        card.style.opacity = '0';
+        card.style.transform = 'translateX(-20px)';
+        setTimeout(() => card.remove(), 300);
+      }
+      
+      // Remove from table
+      const tableRow = document.querySelector(`[data-table-metric="${id}"]`);
+      if (tableRow) {
+        tableRow.remove();
+      }
+      
+      showToast('Metric deleted');
+    }
+    
+    // Show Toast with custom message
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.innerHTML = `<span>✓</span><span>${message}</span>`;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+    
+    // Export CSV - dynamically generates from table
+    function exportCSV() {
+      const table = document.getElementById('metricsTable');
+      const rows = [['Level', 'Category', 'Metric', 'Definition', 'Formula', 'Direction']];
+      
+      table.querySelectorAll('tbody tr').forEach(row => {
+        const cells = row.querySelectorAll('td');
+        if (cells.length >= 6) {
+          rows.push([
+            cells[0].textContent.trim(),
+            cells[1].textContent.trim(),
+            cells[2].textContent.trim(),
+            cells[3].textContent.trim(),
+            cells[4].textContent.trim(),
+            cells[5].textContent.trim()
+          ]);
+        }
+      });
+      
+      const csv = rows.map(r => r.map(c => `"${c.replace(/"/g, '""')}"`).join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Discovery_Agent_Metrics.csv';
+      a.click();
+      showToast('CSV downloaded!');
+    }
+  </script>
+</body>
+</html>
